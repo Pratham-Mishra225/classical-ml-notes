@@ -579,34 +579,85 @@ It reduces correlation between trees.
 
 ## 6.8 Classification Prediction
 
-Let tree $b$ predict class:
+Let tree $b$ predict a class:
 
-$$
-T_b(x) \in \{1,\ldots,K\}
-$$
+```math
+T_b(x) \in \{1, \ldots, K\}
+```
 
-The forest predicts:
+where:
 
-$$
-\hat{y}
-=
-\mathrm{mode}
-\left\{
+- $T_b(x)$ is the class predicted by tree $b$.
+- $K$ is the total number of classes.
+- $b \in \{1, \ldots, B\}$ represents one of the $B$ trees in the forest.
+
+The Random Forest makes its final classification prediction using **majority voting**.
+
+```math
+\hat{y} =
+\operatorname{mode}
+\left(
 T_1(x), T_2(x), \ldots, T_B(x)
-\right\}
-$$
+\right)
+```
 
-Equivalently:
+In other words, the class predicted by the largest number of trees becomes the final prediction.
 
-$$
+Equivalently, we can express majority voting mathematically as:
+
+```math
 \hat{y}
 =
-\underset{k}{\mathrm{arg\,max}}
+\underset{k \in \{1,\ldots,K\}}{\operatorname{arg\,max}}
 \sum_{b=1}^{B}
 \mathbf{1}\{T_b(x)=k\}
+```
+
+where $\mathbf{1}\{T_b(x)=k\}$ is an **indicator function**:
+
+```math
+\mathbf{1}\{T_b(x)=k\}
+=
+\begin{cases}
+1, & \text{if tree } b \text{ predicts class } k \\
+0, & \text{otherwise}
+\end{cases}
+```
+
+Therefore,
+
+$$
+\sum_{b=1}^{B} \mathbf{1}\{T_b(x)=k\}
 $$
 
-where $\mathbf{1}[\cdot]$ is 1 when the condition is true and 0 otherwise.
+counts how many trees in the forest predicted class $k$.
+
+The class receiving the highest number of votes is selected as the final prediction.
+
+### Example
+
+Suppose a Random Forest contains $5$ decision trees and produces the following predictions:
+
+| Tree | Prediction |
+|---|---|
+| $T_1(x)$ | Class A |
+| $T_2(x)$ | Class B |
+| $T_3(x)$ | Class A |
+| $T_4(x)$ | Class A |
+| $T_5(x)$ | Class B |
+
+The vote counts are:
+
+- Class A → $3$ votes
+- Class B → $2$ votes
+
+Therefore:
+
+```math
+\hat{y} = \text{Class A}
+```
+
+This is the **majority voting mechanism** used by Random Forest for classification.
 
 ---
 
