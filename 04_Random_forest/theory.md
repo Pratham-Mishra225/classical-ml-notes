@@ -259,9 +259,9 @@ Tree 5 → 100
 
 Final prediction:
 
-$$
+```math
 \hat{y} = \frac{80+90+85+95+100}{5}=90
-$$
+```
 
 ---
 
@@ -277,9 +277,9 @@ $$
 
 Training dataset:
 
-$$
+```math
 D = \{(x_1,y_1),(x_2,y_2),\ldots,(x_n,y_n)\}
-$$
+```
 
 where:
 
@@ -290,9 +290,9 @@ where:
 
 We construct $B$ trees:
 
-$$
+```math
 T_1,T_2,\ldots,T_B
-$$
+```
 
 Each tree is trained using randomization.
 
@@ -302,15 +302,15 @@ Learn an ensemble function whose prediction generalizes well to unseen data.
 
 For classification:
 
-$$
+```math
 \hat{y} = \operatorname{mode}\{T_1(x),T_2(x),\ldots,T_B(x)\}
-$$
+```
 
 For regression:
 
-$$
+```math
 \hat{y} = \frac{1}{B}\sum_{b=1}^{B}T_b(x)
-$$
+```
 
 ## Input
 
@@ -340,9 +340,9 @@ For regression:
 
 A Random Forest is represented as an ensemble of decision trees:
 
-$$
+```math
 \mathcal{F}=\{T_1,T_2,\ldots,T_B\}
-$$
+```
 
 where $B$ is the number of trees.
 
@@ -390,9 +390,9 @@ At the forest level, the main statistical objective is to reduce generalization 
 
 For a node $t$:
 
-$$
+```math
 G(t)=1-\sum_{k=1}^{K}p_k^2
-$$
+```
 
 where:
 
@@ -401,21 +401,21 @@ where:
 
 A pure node has:
 
-$$
+```math
 G(t)=0
-$$
+```
 
 ### Classification: Entropy
 
-$$
+```math
 H(t)=-\sum_{k=1}^{K}p_k\log_2(p_k)
-$$
+```
 
 Entropy is also:
 
-$$
+```math
 H(t)=-\sum_{k=1}^{K}p_k\log(p_k)
-$$
+```
 
 The base of the logarithm changes only the scale.
 
@@ -425,9 +425,9 @@ Suppose a parent node $P$ is split into left child $L$ and right child $R$.
 
 The weighted impurity is:
 
-$$
+```math
 I_{\text{split}} = \frac{n_L}{n_P}I(L) + \frac{n_R}{n_P}I(R)
-$$
+```
 
 where:
 
@@ -442,9 +442,9 @@ The algorithm prefers a split that gives lower weighted child impurity.
 
 For entropy:
 
-$$
+```math
 IG = H(P) - \left[ \frac{n_L}{n_P}H(L) + \frac{n_R}{n_P}H(R) \right]
-$$
+```
 
 Higher information gain is better.
 
@@ -452,9 +452,9 @@ Higher information gain is better.
 
 Similarly:
 
-$$
+```math
 \Delta G = G(P) - \left[ \frac{n_L}{n_P}G(L) + \frac{n_R}{n_P}G(R) \right]
-$$
+```
 
 Higher impurity reduction is better.
 
@@ -462,15 +462,15 @@ Higher impurity reduction is better.
 
 For node $t$ containing target values $y_i$:
 
-$$
+```math
 MSE(t) = \frac{1}{n_t} \sum_{i\in t}(y_i-\bar{y}_t)^2
-$$
+```
 
 where:
 
-$$
+```math
 \bar{y}_t = \frac{1}{n_t}\sum_{i\in t}y_i
-$$
+```
 
 The tree chooses splits that reduce the weighted MSE.
 
@@ -521,9 +521,9 @@ For each tree, draw $n$ observations **with replacement**.
 
 This creates a bootstrap dataset:
 
-$$
+```math
 D_b^*
-$$
+```
 
 Some original observations can appear multiple times.
 
@@ -533,21 +533,21 @@ Some observations may not appear at all.
 
 For one draw:
 
-$$
+```math
 P(\text{not selected})=1-\frac{1}{n}
-$$
+```
 
 After $n$ draws:
 
-$$
+```math
 P(\text{not selected}) = \left(1-\frac{1}{n}\right)^n
-$$
+```
 
 As $n\to\infty$:
 
-$$
+```math
 \left(1-\frac{1}{n}\right)^n \to e^{-1} \approx 0.368
-$$
+```
 
 So about **36.8%** of the observations are left out of a bootstrap sample on average.
 
@@ -565,9 +565,9 @@ Suppose there are $d$ total features.
 
 At a tree node, Random Forest selects only $m_{\text{try}}$ features:
 
-$$
+```math
 m_{\text{try}} < d
-$$
+```
 
 The split is optimized only over those selected features.
 
@@ -581,9 +581,9 @@ It reduces correlation between trees.
 
 Let tree $b$ predict a class:
 
-$$
+```math
 T_b(x) \in \{1, \ldots, K\}
-$$
+```
 
 where:
 
@@ -593,43 +593,43 @@ where:
 
 The Random Forest makes its final classification prediction using **majority voting**.
 
-$$
+```math
 \hat{y}
 =
 \mathrm{mode}
 \left(
 T_1(x), T_2(x), \ldots, T_B(x)
 \right)
-$$
+```
 
 In other words, the class predicted by the largest number of trees becomes the final prediction.
 
 Equivalently, majority voting can be expressed mathematically as:
 
-$$
+```math
 \hat{y}
 =
 \underset{k \in \{1,\ldots,K\}}{\mathrm{arg\,max}}
 \sum_{b=1}^{B}
 \mathbf{1}\{T_b(x)=k\}
-$$
+```
 
 where $\mathbf{1}\{T_b(x)=k\}$ is an **indicator function**:
 
-$$
+```math
 \mathbf{1}\{T_b(x)=k\}
 =
 \begin{cases}
 1, & \text{if tree } b \text{ predicts class } k \\
 0, & \text{otherwise}
 \end{cases}
-$$
+```
 
 Therefore,
 
-$$
+```math
 \sum_{b=1}^{B} \mathbf{1}\{T_b(x)=k\}
-$$
+```
 
 counts the number of trees that predicted class $k$.
 
@@ -654,9 +654,9 @@ The vote counts are:
 
 Therefore, the final prediction is:
 
-$$
+```math
 \hat{y} = \text{Class A}
-$$
+```
 
 This is the **majority voting mechanism** used by Random Forest for classification.
 
@@ -666,9 +666,9 @@ This is the **majority voting mechanism** used by Random Forest for classificati
 
 For regression:
 
-$$
+```math
 \hat{y} = \frac{1}{B} \sum_{b=1}^{B}T_b(x)
-$$
+```
 
 The forest simply averages the predictions of the trees.
 
@@ -682,27 +682,27 @@ Assume each tree has variance $\sigma^2$ and the pairwise correlation between tr
 
 For a simplified ensemble of $B$ trees:
 
-$$
+```math
 Var(\bar{T}) = \rho\sigma^2 + \frac{1-\rho}{B}\sigma^2
-$$
+```
 
 or equivalently:
 
-$$
+```math
 Var(\bar{T}) = \sigma^2 \left[ \rho+\frac{1-\rho}{B} \right]
-$$
+```
 
 As $B$ becomes large:
 
-$$
+```math
 \frac{1-\rho}{B}\to0
-$$
+```
 
 so:
 
-$$
+```math
 Var(\bar{T})\to\rho\sigma^2
-$$
+```
 
 ### Key conclusion
 
@@ -782,9 +782,9 @@ A Random Forest learns:
 
 There is no single line or simple global equation like:
 
-$$
+```math
 y=w_1x_1+w_2x_2+b
-$$
+```
 
 Instead, the model learns a collection of piecewise decision rules.
 
@@ -858,9 +858,9 @@ Best Split Among Selected Features
 
 Suppose the original dataset is:
 
-$$
+```math
 D=\{(x_i,y_i)\}_{i=1}^{n}
-$$
+```
 
 The forest will contain $B$ trees.
 
@@ -906,15 +906,15 @@ For each node in the tree:
 
 Repeat Steps 2 and 3 for:
 
-$$
+```math
 b=1,2,\ldots,B
-$$
+```
 
 This creates:
 
-$$
+```math
 T_1,T_2,\ldots,T_B
-$$
+```
 
 ---
 
@@ -1340,9 +1340,9 @@ Two common approaches are:
 
 Conceptually:
 
-$$
+```math
 Importance_j = Score_{\text{original}} - Score_{\text{permuted feature }j}
-$$
+```
 
 **Why it matters:** It evaluates feature usefulness based on its effect on model performance.
 
@@ -1702,21 +1702,21 @@ Scikit-Learn support for missing values depends on the exact estimator and versi
 
 Tree splits are based on comparisons such as:
 
-$$
+```math
 x_j < t
-$$
+```
 
 Suppose a feature is transformed by a positive scaling:
 
-$$
+```math
 x'_j = ax_j,\quad a>0
-$$
+```
 
 A threshold transforms as:
 
-$$
+```math
 t'=at
-$$
+```
 
 The ordering of observations does not change.
 
@@ -1876,15 +1876,15 @@ There is no single exact Big-O expression that describes every implementation be
 
 A useful high-level view is:
 
-$$
+```math
 O\left( B \times \text{cost of building one tree} \right)
-$$
+```
 
 For a rough comparison, a tree-growing cost is often expressed in terms related to:
 
-$$
+```math
 O(B \cdot n \log n \cdot m_{\text{try}})
-$$
+```
 
 for simplified settings, but actual implementation complexity can differ.
 
@@ -1904,9 +1904,9 @@ Prediction requires passing each sample through all trees.
 
 A useful high-level form is:
 
-$$
+```math
 O(B \cdot D)
-$$
+```
 
 per sample, where $D$ is the average or maximum tree depth.
 
@@ -1920,9 +1920,9 @@ More precisely, prediction cost also depends on:
 
 The model stores all trees, so memory grows roughly with:
 
-$$
+```math
 O(\text{total number of tree nodes})
-$$
+```
 
 Increasing:
 
@@ -3390,9 +3390,10 @@ The first answer is rarely the end of the interview.
 >
 > We build many such trees. For a classification problem, each tree gives a class prediction and the final answer is the majority vote. For regression, we average the numeric predictions:
 >
-$$
+```math
 \hat{y} = \frac{1}{B}\sum_{b=1}^{B}T_b(x)
-$$
+```
+
 >
 > The statistical reason this works is variance reduction. If the trees have variance $\sigma^2$ and are not perfectly correlated, averaging their predictions reduces the random part of the error. Therefore, Random Forest usually has much lower variance than a single deep tree while retaining the ability to model complex non-linear relationships.
 >
