@@ -790,7 +790,7 @@ This means:
 The odds of class $1$ are:
 
 $$
-\operatorname{Odds}=\frac{p}{1-p}
+\mathrm{Odds}=\frac{p}{1-p}
 $$
 
 ### Log-Odds
@@ -798,7 +798,7 @@ $$
 The log-odds, or logit, are:
 
 $$
-\operatorname{logit}(p)=\log\left(\frac{p}{1-p}\right)
+\mathrm{logit}(p)=\log\left(\frac{p}{1-p}\right)
 $$
 
 ## 6.8 Coefficient Interpretation
