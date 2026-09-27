@@ -358,11 +358,7 @@ $$
 We choose the split that minimizes the **weighted child impurity**:
 
 $$
-J(j,t)
-=
-\frac{|S_L|}{|S|} I(S_L)
-+
-\frac{|S_R|}{|S|} I(S_R)
+J(j,t) = \frac{|S_L|}{|S|} I(S_L) + \frac{|S_R|}{|S|} I(S_R)
 $$
 
 ### Equivalent Formulation
@@ -370,9 +366,7 @@ $$
 The **impurity reduction** produced by the split is:
 
 $$
-\text{Impurity Reduction}
-=
-I(S) - J(j,t)
+\text{Impurity Reduction} = I(S) - J(j,t)
 $$
 
 where:
@@ -442,15 +436,7 @@ Interpretation:
 A split's information gain is:
 
 $$
-IG
-=
-H(S)
--
-\left(
-\frac{|S_L|}{|S|}H(S_L)
-+
-\frac{|S_R|}{|S|}H(S_R)
-\right)
+IG = H(S) - \left( \frac{|S_L|}{|S|}H(S_L) + \frac{|S_R|}{|S|}H(S_R) \right)
 $$
 
 Choose the split with maximum information gain.
@@ -472,10 +458,7 @@ $$
 For a candidate split:
 
 $$
-J(j,t)=
-\frac{|S_L|}{|S|}MSE(S_L)
-+
-\frac{|S_R|}{|S|}MSE(S_R)
+J(j,t)= \frac{|S_L|}{|S|}MSE(S_L) + \frac{|S_R|}{|S|}MSE(S_R)
 $$
 
 The algorithm selects the split that minimizes $J(j,t)$, or equivalently maximizes variance/MSE reduction.
@@ -559,17 +542,13 @@ $$
 The fraction of samples entering each child is:
 
 $$
-w_L=\frac{N_L}{N},
-\qquad
-w_R=\frac{N_R}{N}
+w_L=\frac{N_L}{N}, \qquad w_R=\frac{N_R}{N}
 $$
 
 So the post-split impurity is:
 
 $$
-I_{\text{after}}
-=
-w_LI_L+w_RI_R
+I_{\text{after}} = w_LI_L+w_RI_R
 $$
 
 To choose the best split, minimize:
@@ -607,9 +586,7 @@ $$
 Differentiate:
 
 $$
-\frac{dL}{dc}
-=
--2\sum_{i=1}^{m}(y_i-c)
+\frac{dL}{dc} = -2\sum_{i=1}^{m}(y_i-c)
 $$
 
 Set derivative to zero:
@@ -1079,9 +1056,7 @@ G_L=1-\left(\frac35\right)^2-\left(\frac25\right)^2
 $$
 
 $$
-=1-\frac{9}{25}-\frac{4}{25}
-=\frac{12}{25}
-=0.48
+=1-\frac{9}{25}-\frac{4}{25} =\frac{12}{25} =0.48
 $$
 
 Right child:
@@ -1104,22 +1079,17 @@ G_R=1-\left(\frac13\right)^2-\left(\frac23\right)^2
 $$
 
 $$
-=1-\frac19-\frac49
-=\frac49
-\approx0.444
+=1-\frac19-\frac49 =\frac49 \approx0.444
 $$
 
 Weighted child impurity:
 
 $$
-G_{after}
-=
-\frac58(0.48)+\frac38\left(\frac49\right)
+G_{after} = \frac58(0.48)+\frac38\left(\frac49\right)
 $$
 
 $$
-=0.30+0.1667
-\approx0.4667
+=0.30+0.1667 \approx0.4667
 $$
 
 Gini reduction:
@@ -2495,7 +2465,6 @@ The following simplified classifier uses Gini impurity and binary numeric splits
 ```python
 import numpy as np
 
-
 class Node:
     def __init__(
         self,
@@ -2513,7 +2482,6 @@ class Node:
 
     def is_leaf(self):
         return self.value is not None
-
 
 class DecisionTreeClassifierScratch:
     def __init__(
@@ -3122,9 +3090,7 @@ I would control complexity using `max_depth`, `min_samples_split`, `min_samples_
 For each candidate split, the tree calculates the weighted impurity of the child nodes:
 
 $$
-J=
-\frac{N_L}{N}I_L+
-\frac{N_R}{N}I_R
+J= \frac{N_L}{N}I_L+ \frac{N_R}{N}I_R
 $$
 
 It selects the split that minimizes this quantity, or equivalently maximizes impurity reduction:
@@ -3221,44 +3187,43 @@ is the arithmetic mean of the target values.
 
 ## 3-Minute Explanation
 
-> A Decision Tree is a non-parametric supervised learning model that partitions the feature space recursively. Suppose we have a node containing $N$ observations. For every candidate feature and threshold, we split the node into a left and right child. We then calculate the weighted child impurity:
->
-> $$
-> J=
-> \frac{N_L}{N}I_L+
-> \frac{N_R}{N}I_R
-> $$
->
-> We choose the split that minimizes this value, or equivalently maximizes the reduction:
->
-> $$
-> I_{parent}-J
-> $$
->
-> In classification, one common impurity measure is Gini:
->
-> $$
-> G=1-\sum_kp_k^2
-> $$
->
-> and another is entropy:
->
-> $$
-> H=-\sum_kp_k\log_2p_k
-> $$
->
-> In regression, a common criterion is:
->
-> $$
-> MSE=\frac{1}{N}\sum_i(y_i-\bar y)^2
-> $$
->
-> We recursively apply the same procedure to child nodes. The algorithm is greedy, so it optimizes the best split at the current node rather than solving for the globally optimal tree structure. Once a stopping condition such as maximum depth or minimum leaf size is reached, we create a leaf. For classification, the leaf usually predicts the most frequent class; for regression, the leaf commonly predicts the mean target.
->
-> During prediction, a new observation starts at the root, evaluates each rule, moves left or right, and continues until it reaches a leaf.
->
-> The biggest practical issue is overfitting because a deep tree can create very small regions and memorize noise. Therefore I would tune `max_depth`, `min_samples_split`, `min_samples_leaf`, and pruning parameters using cross-validation. A single tree is highly interpretable, but if variance and instability are a major concern, I would consider Random Forest or boosting.
-
+> > A Decision Tree is a non-parametric supervised learning model that partitions the feature space recursively. Suppose we have a node containing $N$ observations. For every candidate feature and threshold, we split the node into a left and right child. We then calculate the weighted child impurity:
+> >
+> > $$
+> > J=
+> > \frac{N_L}{N}I_L+
+> > \frac{N_R}{N}I_R
+> > $$
+> >
+> > We choose the split that minimizes this value, or equivalently maximizes the reduction:
+> >
+> > $$
+> > I_{parent}-J
+> > $$
+> >
+> > In classification, one common impurity measure is Gini:
+> >
+> > $$
+> > G=1-\sum_kp_k^2
+> > $$
+> >
+> > and another is entropy:
+> >
+> > $$
+> > H=-\sum_kp_k\log_2p_k
+> > $$
+> >
+> > In regression, a common criterion is:
+> >
+> > $$
+> > MSE=\frac{1}{N}\sum_i(y_i-\bar y)^2
+> > $$
+> >
+> > We recursively apply the same procedure to child nodes. The algorithm is greedy, so it optimizes the best split at the current node rather than solving for the globally optimal tree structure. Once a stopping condition such as maximum depth or minimum leaf size is reached, we create a leaf. For classification, the leaf usually predicts the most frequent class; for regression, the leaf commonly predicts the mean target.
+> >
+> > During prediction, a new observation starts at the root, evaluates each rule, moves left or right, and continues until it reaches a leaf.
+> >
+> > The biggest practical issue is overfitting because a deep tree can create very small regions and memorize noise. Therefore I would tune `max_depth`, `min_samples_split`, `min_samples_leaf`, and pruning parameters using cross-validation. A single tree is highly interpretable, but if variance and instability are a major concern, I would consider Random Forest or boosting.
 ---
 
 # 37. Key Takeaways
