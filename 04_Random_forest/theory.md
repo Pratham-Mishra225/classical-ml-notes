@@ -582,19 +582,28 @@ It reduces correlation between trees.
 Let tree $b$ predict class:
 
 $$
-T_b(x)\in\{1,\ldots,K\}
+T_b(x) \in \{1,\ldots,K\}
 $$
 
 The forest predicts:
 
 $$
-\hat{y} = \operatorname{mode} \left\{ T_1(x),T_2(x),\ldots,T_B(x) \right\}
+\hat{y}
+=
+\mathrm{mode}
+\left\{
+T_1(x), T_2(x), \ldots, T_B(x)
+\right\}
 $$
 
 Equivalently:
 
 $$
-\hat{y} = \arg\max_k \sum_{b=1}^{B} \mathbf{1}[T_b(x)=k]
+\hat{y}
+=
+\underset{k}{\mathrm{arg\,max}}
+\sum_{b=1}^{B}
+\mathbf{1}\{T_b(x)=k\}
 $$
 
 where $\mathbf{1}[\cdot]$ is 1 when the condition is true and 0 otherwise.
