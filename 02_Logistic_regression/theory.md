@@ -503,7 +503,7 @@ Therefore a larger linear score produces a larger predicted probability.
 The model assumes a Bernoulli outcome for each observation:
 
 $$
-y_i\sim\operatorname{Bernoulli}(p_i)
+y_i\sim\mathrm{Bernoulli}(p_i)
 $$
 
 where:
@@ -1156,14 +1156,14 @@ $$
 
 Using threshold $t$:
 
-$$
-\hat y=
+```math
+\hat{y} =
 \begin{cases}
-1,&p\ge t\\
-0,&p<t
+1, & p \geq t \\
+0, & p \lt t
 \end{cases}
-$$
-
+```
+    
 The common default-style threshold is $t=0.5$, but it should not be treated as universally optimal.
 
 ## Algorithm Flow
@@ -1541,7 +1541,7 @@ $$
 **Definition:** The logit is the natural logarithm of the odds.
 
 $$
-\operatorname{logit}(p)=\log\left(\frac{p}{1-p}\right)
+\mathrm{logit}(p)=\log\left(\frac{p}{1-p}\right)
 $$
 
 **Why it matters:** Logistic Regression assumes this quantity is linearly related to the features.
