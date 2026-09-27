@@ -367,7 +367,7 @@ $$
 Equivalent formulation:
 
 $$
-\text{Impurity Reduction}
+Impurity Reduction
 =
 I(S)-J(j,t)
 $$
