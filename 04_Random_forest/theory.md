@@ -303,7 +303,7 @@ Learn an ensemble function whose prediction generalizes well to unseen data.
 For classification:
 
 ```math
-\hat{y} = \operatorname{mode}\{T_1(x),T_2(x),\ldots,T_B(x)\}
+\hat{y} = \mathrm{mode}\{T_1(x),T_2(x),\ldots,T_B(x)\}
 ```
 
 For regression:
