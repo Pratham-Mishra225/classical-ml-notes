@@ -441,25 +441,25 @@ $$
 
 Euclidean distance is:
 
-$$
+```math
 d(x,z)
 =
 \sqrt{
 \sum_{j=1}^{d}(x_j-z_j)^2
 }
-$$
+```
 
 ### Minkowski Distance
 
 A more general family is:
 
-$$
+```math
 d_p(x,z)
 =
 \left(
 \sum_{j=1}^{d}|x_j-z_j|^p
 \right)^{1/p}
-$$
+```
 
 Special cases include:
 
@@ -479,21 +479,21 @@ Chebyshev distance
 
 For $p=1$:
 
-$$
+```math
 d_1(x,z)
 =
 \sum_{j=1}^{d}|x_j-z_j|
-$$
+```
 
 For $p=2$:
 
-$$
+```math
 d_2(x,z)
 =
 \sqrt{
 \sum_{j=1}^{d}(x_j-z_j)^2
 }
-$$
+```
 
 ## 6.4 Why This Objective Function?
 
@@ -527,13 +527,13 @@ The expensive part is therefore usually **prediction**, not fitting.
 
 For query point $x^\ast$ and training point $x_i$:
 
-$$
+```math
 d_i
 =
 \sqrt{
 \sum_{j=1}^{d}(x^\ast_j-x_{ij})^2
 }
-$$
+```
 
 ### Step 2 — Rank the Distances
 
@@ -555,49 +555,49 @@ $$
 
 Then:
 
-$$
+```math
 N_k(x^\ast)
 =
 \{i_1,i_2,\ldots,i_k\}
-$$
+```
 
 ### Step 4 — Classification
 
 For class $c$, define:
 
-$$
+```math
 V_c
 =
 \sum_{i\in N_k(x^\ast)}
 \mathbf{1}\{y_i=c\}
-$$
+```
 
 The predicted class is the class with the largest vote count:
 
-$$
+```math
 \hat{y}
 =
 \underset{c}{\mathrm{arg\,max}}
 \;
 V_c
-$$
+```
 
 ### Step 5 — Regression
 
 The standard unweighted prediction is:
 
-$$
+```math
 \hat{y}
 =
 \frac{1}{k}
 \sum_{i\in N_k(x^\ast)} y_i
-$$
+```
 
 ### Step 6 — Distance-Weighted Regression
 
 A common weighted version is:
 
-$$
+```math
 \hat{y}
 =
 \frac{
@@ -605,7 +605,7 @@ $$
 }{
 \sum_{i\in N_k(x^\ast)} w_i
 }
-$$
+```
 
 where $w_i$ gives greater influence to closer neighbors.
 
@@ -957,51 +957,51 @@ $$
 
 Using Euclidean distance:
 
-$$
+```math
 d(x^\ast,x)
 =
 \sqrt{(x_1^\ast-x_1)^2+(x_2^\ast-x_2)^2}
-$$
+```
 
 Distance to $(2,2)$:
 
-$$
+```math
 d_1
 =
 \sqrt{(3-2)^2+(3-2)^2}
 =
 \sqrt{2}
-$$
+```
 
 Distance to $(4,4)$:
 
-$$
+```math
 d_2
 =
 \sqrt{(3-4)^2+(3-4)^2}
 =
 \sqrt{2}
-$$
+```
 
 Distance to $(2,1)$:
 
-$$
+```math
 d_3
 =
 \sqrt{(3-2)^2+(3-1)^2}
 =
 \sqrt{5}
-$$
+```
 
 Distance to $(5,4)$:
 
-$$
+```math
 d_4
 =
 \sqrt{(3-5)^2+(3-4)^2}
 =
 \sqrt{5}
-$$
+```
 
 The remaining distances are larger.
 
@@ -1290,13 +1290,13 @@ The correct metric depends on the structure and meaning of the features.
 
 For the Minkowski metric:
 
-$$
+```math
 d_p(x,z)
 =
 \left(
 \sum_{j=1}^{d}|x_j-z_j|^p
 \right)^{1/p}
-$$
+```
 
 Examples:
 
@@ -1534,11 +1534,11 @@ Without scaling, the income feature can dominate Euclidean distance.
 
 For standardized features:
 
-$$
+```math
 z_j
 =
 \frac{x_j-\mu_j}{\sigma_j}
-$$
+```
 
 the features are placed on a more comparable numerical scale.
 
