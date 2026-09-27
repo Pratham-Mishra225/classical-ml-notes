@@ -348,35 +348,40 @@ At a node containing a set of samples $S$, we want a split that produces child s
 For a candidate binary split:
 
 $$
-S_L=\{i\in S:x_{ij}\le t\}
+S_L = \{i \in S : x_{ij} \leq t\}
 $$
 
 $$
-S_R=\{i\in S:x_{ij}>t\}
+S_R = \{i \in S : x_{ij} > t\}
 $$
 
-We choose the split minimizing the weighted child impurity:
+We choose the split that minimizes the **weighted child impurity**:
 
 $$
-J(j,t)=
-\frac{|S_L|}{|S|}I(S_L)
-+
-\frac{|S_R|}{|S|}I(S_R)
-$$
-
-Equivalent formulation:
-
-$$
-Impurity Reduction
+J(j,t)
 =
-I(S)-J(j,t)
+\frac{|S_L|}{|S|} I(S_L)
++
+\frac{|S_R|}{|S|} I(S_R)
+$$
+
+### Equivalent Formulation
+
+The **impurity reduction** produced by the split is:
+
+$$
+\text{Impurity Reduction}
+=
+I(S) - J(j,t)
 $$
 
 where:
 
-- $I(S)$ = impurity of the parent;
-- $I(S_L)$ = impurity of the left child;
+- $I(S)$ = impurity of the parent node.
+- $I(S_L)$ = impurity of the left child.
 - $I(S_R)$ = impurity of the right child.
+
+The decision tree selects the feature $j$ and threshold $t$ that **minimize the weighted child impurity**, or equivalently, **maximize the impurity reduction**.
 
 ## 6.3 Loss / Cost / Objective Function
 
